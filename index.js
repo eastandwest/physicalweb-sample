@@ -18,9 +18,10 @@ const httpsServer = https.createServer({key, cert}, app)
 httpsServer.listen(port, () => {
   try {
     console.log(`express server started on port ${port}`)
+
     const url = `https://${ip.address()}:${port}`
     eddystoneBeacon.advertiseUrl(url)
-    console.log(`broadcasting url : ${url} by physical web`)
+    console.log(`start broadcasting url : ${url} on physical web`)
   } catch(err) {
     console.warn(err.message)
   }
