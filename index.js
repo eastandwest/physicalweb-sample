@@ -1,17 +1,15 @@
-const ip = require('ip')
-const https = require('https')
-const fs = require('fs')
-const path = require('path')
-const eddystoneBeacon = require('eddystone-beacon')
+const ip      = require('ip')
+const https   = require('https')
+const fs      = require('fs')
+const path    = require('path')
 const express = require('express')
+const eddystoneBeacon = require('eddystone-beacon')
 
-const key = fs.readFileSync(path.join( __dirname + "/self-signed/server.key"))
+const key  = fs.readFileSync(path.join( __dirname + "/self-signed/server.key"))
 const cert = fs.readFileSync(path.join( __dirname + "/self-signed/server.crt"))
 
 const app = express()
-app.get('/', (req, res) => {
-  res.send('it works!!')
-})
+app.use(express.static( path.join(__dirname, '/public')) )
 
 const port = process.env.PORT || 3000
 const httpsServer = https.createServer({key, cert}, app)
